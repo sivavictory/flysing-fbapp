@@ -1,7 +1,7 @@
 var express = require('express'),
 app = express();
 app.use(express.static('www'));
-app.set('port', process.env.port || 5000);
+app.set('port', process.env.PORT || 5000);
 
 //For avoidong Heroku $PORT error
 app.get('/', function(request, response) {
