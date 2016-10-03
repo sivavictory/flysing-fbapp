@@ -1,4 +1,4 @@
-# Sociogram for AngularJS / Ionic #
+# FB App for AngularJS / Ionic #
 
 A sample application that demonstrates a lightweight approach to integrate with Facebook in your AngularJS / Ionic apps.
 
@@ -17,6 +17,6 @@ A sample application that demonstrates a lightweight approach to integrate with 
 
 5. Copy the Facebook App Id and paste it as the first argument of the OpenFB.init() method invocation in the run() function in app.js.
 
-6. To run the app in the browser: Load index.html, from a location that matches the redirect URI you defined above. For example: http://localhost/openfb/index.html
+6. To run the app in the browser: Load index.html, from a location that matches the redirect URI you defined above. For example: http://localhost:8100/
 
 7. To run the app in Cordova: Build the Ionic project and run it as a Cordova app on your device

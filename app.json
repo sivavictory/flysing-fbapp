@@ -1,0 +1,7 @@
+{
+    "name": "FB ionic to heroku App",
+    "description": "Flysingionic app for heroku",
+    "repository": "https://github.com/sivavictory/flysing-fbapp",
+    "logo": "http://pathtoyourlogo.png",
+    "keywords": ["ionic", "flysing-fbapp"]
+}
