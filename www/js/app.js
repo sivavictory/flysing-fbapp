@@ -3,8 +3,9 @@ angular.module('flysingapp-fb', ['ionic', 'openfb', 'flysingapp-fb.controllers']
     .run(function ($rootScope, $state, $ionicPlatform, $window, OpenFB) {
 
        // OpenFB.init('YOUR_FB_APP_ID');
-                OpenFB.init('566722806848809', 'http://localhost:8100/oauthcallback.html')
+                //OpenFB.init('566722806848809', 'http://localhost:8100/oauthcallback.html')
 
+                OpenFB.init('615478585301823', 'https://flysing-fbapp.herokuapp.com/oauthcallback.html')
 
         $ionicPlatform.ready(function () {
             if (window.StatusBar) {
