@@ -1,0 +1,82 @@
+var express = require('express'),
+app = express();
+
+var RED = require("node-red");
+var http = require('http');
+
+// Create a server
+var server = http.createServer(app);
+// Create the settings object - see default settings.js file for other options
+var settings = {
+    httpAdminRoot:"/red",
+    httpNodeRoot: "/api",
+    userDir:"/Users/siva/.node-red/",
+    functionGlobalContext: { }    // enables global context
+};
+
+
+// Initialise the runtime with a server and settings
+RED.init(server,settings);
+
+// Serve the editor UI from /red
+app.use(settings.httpAdminRoot,RED.httpAdmin);
+
+// Serve the http nodes UI from /api
+app.use(settings.httpNodeRoot,RED.httpNode);
+
+server.listen(8000);
+
+// Start the runtime
+RED.start();
+
+app.use(express.static('www'));
+app.set('port', process.env.PORT || 5000);
+
+/*
+const Bleacon = require('bleacon')
+
+const startedAt = new Date().getTime()
+
+function pad(str, len) {
+  while (str.length < len) {
+    str = '0' + str
+  }
+  return str
+}
+
+function isBean(beacon) {
+  return beacon.uuid.match('5C3F2F21-20D1-11E6-A9BB-06481FD16E71')
+}
+
+
+Bleacon.on('discover', (beacon) => {
+  const elapsed = new Date().getTime() - startedAt
+  const uuid = beacon.uuid
+  const major = pad(beacon.major.toString(16), 4)
+  const minor = pad(beacon.minor.toString(16), 4)
+  let info = `${elapsed}: ${uuid} | ${major} | ${minor}`
+  if (isBean(beacon)) {
+    info += ' <-- Bean!'
+  }
+  console.log(info)
+})
+
+var uuid = '5C3F2F21-20D1-11E6-A9BB-06481FD16E71';
+var major = 100; // 0 - 65535 
+var minor = 2; // 0 - 65535 
+
+//Bleacon.startScanning()
+//Bleacon.startScanning([uuid], [major], [minor]);//Disabled since error
+
+
+console.log('0: Listening for iBeacons...')
+*/
+
+//For avoidong Heroku $PORT error
+app.get('/', function(request, response) {
+    var result = 'App is running'
+    response.send(result);
+})
+.listen(app.get('port'), function () {
+    console.log('express server listening on port ' + app.get('port'));
+});

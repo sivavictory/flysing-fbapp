@@ -1,0 +1,69 @@
+/**
+ * Function that creates a BeaconRegion data transfer object.
+ * 
+ * @throws Error if the BeaconRegion parameters are not valid.
+ */
+function createBeacon() {
+ 
+    var uuid = '00000000-0000-0000-0000-000000000000'; // mandatory
+    var identifier = 'beaconAtTheMacBooks'; // mandatory
+    var minor = 1000; // optional, defaults to wildcard if left empty
+    var major = 5; // optional, defaults to wildcard if left empty
+ 
+    // throws an error if the parameters are not valid
+    var beaconRegion = new cordova.plugins.locationManager.BeaconRegion(identifier, uuid, major, minor);
+   
+    return beaconRegion;   
+} 
+Start monitoring a single iBeacon
+var logToDom = function (message) {
+    var e = document.createElement('label');
+    e.innerText = message;
+ 
+    var br = document.createElement('br');
+    var br2 = document.createElement('br');
+    document.body.appendChild(e);
+    document.body.appendChild(br);
+    document.body.appendChild(br2);
+    
+    window.scrollTo(0, window.document.height);
+};
+ 
+var delegate = new cordova.plugins.locationManager.Delegate();
+    
+delegate.didDetermineStateForRegion = function (pluginResult) {
+ 
+    logToDom('[DOM] didDetermineStateForRegion: ' + JSON.stringify(pluginResult));
+ 
+    cordova.plugins.locationManager.appendToDeviceLog('[DOM] didDetermineStateForRegion: '
+        + JSON.stringify(pluginResult));
+};
+ 
+delegate.didStartMonitoringForRegion = function (pluginResult) {
+    console.log('didStartMonitoringForRegion:', pluginResult);
+ 
+    logToDom('didStartMonitoringForRegion:' + JSON.stringify(pluginResult));
+};
+ 
+delegate.didRangeBeaconsInRegion = function (pluginResult) {
+    logToDom('[DOM] didRangeBeaconsInRegion: ' + JSON.stringify(pluginResult));
+};
+ 
+
+var uuid = '5C3F2F21-20D1-11E6-A9BB-06481FD16E71';
+var major = 100; // 0 - 65535 
+var minor = 2; // 0 - 65535 
+
+var identifier = 'CheckinDesk';
+var beaconRegion = new cordova.plugins.locationManager.BeaconRegion(identifier, uuid, major, minor);
+ 
+cordova.plugins.locationManager.setDelegate(delegate);
+ 
+// required in iOS 8+
+cordova.plugins.locationManager.requestWhenInUseAuthorization(); 
+// or cordova.plugins.locationManager.requestAlwaysAuthorization()
+ 
+cordova.plugins.locationManager.startMonitoringForRegion(beaconRegion)
+    .fail(console.error)
+    .done();
+ 
