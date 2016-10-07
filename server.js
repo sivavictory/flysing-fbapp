@@ -9,26 +9,7 @@ app.get('/', function(request, response) {
     response.send(result);
 })
 
-var Client = require('node-rest-client').Client;
- 
-var client = new Client();
-
-// set content-type header and data as json in args parameter 
-var args = {
-    data: { test: "hello" },
-    headers: { "Content-Type": "application/json" }
-};
-
 app.get('/listUsers', function (req, res) {
-   // direct way 
-client.get("https://airport.api.aero/airport/match/Amst?user_key=3035d833bb6e531654a3cce03e6b1fde", args,function (data, response) {
-    // parsed response body as js object 
-    console.log(data);
-    // raw response 
-    console.log(response);
-}).on('error', function (err) {
-    console.log('something went wrong on the request', err.request.options);
-});
 
 })
 
